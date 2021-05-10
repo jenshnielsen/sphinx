@@ -2074,7 +2074,7 @@ class MethodDocumenter(DocstringSignatureMixin, ClassLevelDocumenter):  # type: 
                     sig = inspect.signature(self.object, bound_method=True,
                                             type_aliases=self.config.autodoc_type_aliases)
                 args = stringify_signature(sig, **kwargs)
-        except TypeError as exc:
+        except (TypeError, ValueError) as exc:
             logger.warning(__("Failed to get a method signature for %s: %s"),
                            self.fullname, exc)
             return None
